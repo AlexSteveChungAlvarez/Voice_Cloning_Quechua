@@ -29,17 +29,17 @@ def run(gpu_id, resume_checkpoint, finetune, model_dir, resume, use_wandb, wandb
     if model_dir is not None:
         save_dir = model_dir
     else:
-        save_dir = os.path.join("Models", "FastSpeech2_German")  # KEEP THE 'FastSpeech2_' BUT CHANGE THE MODEL ID TO SOMETHING MEANINGFUL FOR YOUR DATA
+        save_dir = os.path.join("Models", "FastSpeech2_Quechua")  # KEEP THE 'FastSpeech2_' BUT CHANGE THE MODEL ID TO SOMETHING MEANINGFUL FOR YOUR DATA
     os.makedirs(save_dir, exist_ok=True)
 
     datasets = list()
-    datasets.append(prepare_fastspeech_corpus(transcript_dict=build_path_to_transcript_dict_karlsson(),
-                                              corpus_dir=os.path.join("Corpora", "Karlsson"),
-                                              lang="de"))  # CHANGE THE TRANSCRIPT DICT, THE NAME OF THE CACHE DIRECTORY AND THE LANGUAGE TO YOUR NEEDS
+    datasets.append(prepare_fastspeech_corpus(transcript_dict=build_path_to_transcript_dict_quechua(),
+                                              corpus_dir=os.path.join("Corpora", "Quechua"),
+                                              lang="qu"))  # CHANGE THE TRANSCRIPT DICT, THE NAME OF THE CACHE DIRECTORY AND THE LANGUAGE TO YOUR NEEDS
 
-    datasets.append(prepare_fastspeech_corpus(transcript_dict=build_path_to_transcript_dict_eva(),
-                                              corpus_dir=os.path.join("Corpora", "Eva"),
-                                              lang="de"))  # YOU CAN SIMPLY ADD MODE CORPORA AND DO THE SAME, BUT YOU DON'T HAVE TO, ONE IS ENOUGH
+    #datasets.append(prepare_fastspeech_corpus(transcript_dict=build_path_to_transcript_dict_eva(),
+    #                                          corpus_dir=os.path.join("Corpora", "Eva"),
+    #                                          lang="de"))  # YOU CAN SIMPLY ADD MODE CORPORA AND DO THE SAME, BUT YOU DON'T HAVE TO, ONE IS ENOUGH
 
     train_set = ConcatDataset(datasets)
     model = FastSpeech2()
@@ -54,7 +54,7 @@ def run(gpu_id, resume_checkpoint, finetune, model_dir, resume, use_wandb, wandb
                device=device,
                save_directory=save_dir,
                batch_size=12,  # YOU MIGHT GET OUT OF MEMORY ISSUES ON SMALL GPUs, IF SO, DECREASE THIS
-               lang="de",  # CHANGE THIS TO THE LANGUAGE YOU'RE TRAINING ON
+               lang="qu",  # CHANGE THIS TO THE LANGUAGE YOU'RE TRAINING ON
                lr=0.001,
                epochs_per_save=1,
                warmup_steps=4000,

@@ -54,6 +54,8 @@ def plot_progress_spec(net, device, save_dir, step, lang, default_emb):
         sentence = "这是一个复杂的句子，它甚至包含一个停顿。"
     elif lang == "vi":
         sentence = "Đây là một câu phức tạp, nó thậm chí còn chứa một khoảng dừng."
+    elif lang == "qu":
+        sentence = "Kayqa huk compleja frase, ¡huk pausayuqraqmi!"
     phoneme_vector = tf.string_to_tensor(sentence).squeeze(0).to(device)
     spec, durations, pitch, energy = net.inference(text=phoneme_vector,
                                                    return_duration_pitch_energy=True,

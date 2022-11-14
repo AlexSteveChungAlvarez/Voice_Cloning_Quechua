@@ -11,6 +11,19 @@ def limit_to_n(path_to_transcript_dict, n=30000):
     else:
         return path_to_transcript_dict
 
+def build_path_to_transcript_dict_quechua():
+    root = "Corpora"
+    language = "Quechua"
+    path_to_transcript = dict()
+    with open(os.path.join(root, "transcripts.txt"), mode="r", encoding="cp1252") as f:
+        transcripts = f.read().split("\n")
+    for transcript in transcripts:
+        if transcript.strip() != "":
+            parsed_line = transcript.split("\"")
+            audio_title = parsed_line[0].split(" ")[1]
+            audio_file = os.path.join(root,language,audio_title+".wav")
+            path_to_transcript[audio_file] = parsed_line[1]
+    return limit_to_n(path_to_transcript)
 
 def build_path_to_transcript_dict_mls_italian():
     lang = "italian"

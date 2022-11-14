@@ -105,7 +105,6 @@ class AlignerDataset(Dataset):
             self.datapoints = torch.load(os.path.join(cache_dir, "aligner_train_cache.pt"), map_location='cpu')
             self.speaker_embeddings = self.datapoints[2]
             self.datapoints = self.datapoints[0]
-
         self.tf = ArticulatoryCombinedTextFrontend(language=lang)
         print(f"Prepared an Aligner dataset with {len(self.datapoints)} datapoints in {cache_dir}.")
 
