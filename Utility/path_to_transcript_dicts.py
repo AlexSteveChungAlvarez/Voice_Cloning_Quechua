@@ -25,6 +25,19 @@ def build_path_to_transcript_dict_quechua():
             path_to_transcript[audio_file] = parsed_line[1]
     return limit_to_n(path_to_transcript)
 
+def build_path_to_transcript_dict_libritts_clean_360():
+    path_train = "Corpora/LibriTTS/train-clean-360"
+    path_to_transcript = dict()
+    for speaker in os.listdir(path_train):
+        for chapter in os.listdir(os.path.join(path_train, speaker)):
+            for file in os.listdir(os.path.join(path_train, speaker, chapter)):
+                if file.endswith("normalized.txt"):
+                    with open(os.path.join(path_train, speaker, chapter, file), 'r', encoding='utf8') as tf:
+                        transcript = tf.read()
+                    wav_file = file.split(".")[0] + ".wav"
+                    path_to_transcript[os.path.join(path_train, speaker, chapter, wav_file)] = transcript
+    return limit_to_n(path_to_transcript)
+
 def build_path_to_transcript_dict_mls_italian():
     lang = "italian"
     root = f"/mount/resources/speech/corpora/MultiLingLibriSpeech/mls_{lang}/train"
