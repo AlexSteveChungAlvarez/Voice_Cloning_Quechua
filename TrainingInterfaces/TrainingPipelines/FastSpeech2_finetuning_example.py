@@ -33,9 +33,9 @@ def run(gpu_id, resume_checkpoint, finetune, model_dir, resume, use_wandb, wandb
     os.makedirs(save_dir, exist_ok=True)
 
     datasets = list()
-    #datasets.append(prepare_fastspeech_corpus(transcript_dict=build_path_to_transcript_dict_quechua(),
-    #                                          corpus_dir=os.path.join("Corpora", "Quechua"),
-    #                                          lang="qu"))  # CHANGE THE TRANSCRIPT DICT, THE NAME OF THE CACHE DIRECTORY AND THE LANGUAGE TO YOUR NEEDS
+    datasets.append(prepare_fastspeech_corpus(transcript_dict=build_path_to_transcript_dict_quechua(),
+                                              corpus_dir=os.path.join("Corpora", "Quechua"),
+                                              lang="qu"))  # CHANGE THE TRANSCRIPT DICT, THE NAME OF THE CACHE DIRECTORY AND THE LANGUAGE TO YOUR NEEDS
 
     datasets.append(prepare_fastspeech_corpus(transcript_dict=build_path_to_transcript_dict_libritts_clean_360(),
                                               corpus_dir=os.path.join("Corpora", "LibriTTS"),
@@ -53,7 +53,7 @@ def run(gpu_id, resume_checkpoint, finetune, model_dir, resume, use_wandb, wandb
                datasets=datasets,
                device=device,
                save_directory=save_dir,
-               batch_size=16,  # YOU MIGHT GET OUT OF MEMORY ISSUES ON SMALL GPUs, IF SO, DECREASE THIS
+               batch_size=8,  # YOU MIGHT GET OUT OF MEMORY ISSUES ON SMALL GPUs, IF SO, DECREASE THIS
                #lang="qu",  # CHANGE THIS TO THE LANGUAGE YOU'RE TRAINING ON
                lr=0.001,
                #epochs_per_save=1,
@@ -65,6 +65,7 @@ def run(gpu_id, resume_checkpoint, finetune, model_dir, resume, use_wandb, wandb
                resume=resume,
                phase_1_steps=50000,
                phase_2_steps=50000,
+               steps_per_checkpoint=1000,
                use_wandb=use_wandb)
     if use_wandb:
         wandb.finish()
