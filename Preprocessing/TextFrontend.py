@@ -301,6 +301,7 @@ class ArticulatoryCombinedTextFrontend:
             ("\t", " "),
             ("¡", ""),
             ("¿", ""),
+            ("'","ˈ"),
             # unifying some phoneme representations
             ("ɫ", "l"),  # alveolopalatal
             ("ɚ", "ə"),

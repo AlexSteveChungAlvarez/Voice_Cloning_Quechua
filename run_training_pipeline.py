@@ -7,7 +7,7 @@ from TrainingInterfaces.TrainingPipelines.FastSpeech2_Controllable import run as
 from TrainingInterfaces.TrainingPipelines.FastSpeech2_Embedding import run as gst
 from TrainingInterfaces.TrainingPipelines.FastSpeech2_IntegrationTest import run as integration_test
 from TrainingInterfaces.TrainingPipelines.FastSpeech2_MetaCheckpoint import run as meta_fast
-from TrainingInterfaces.TrainingPipelines.FastSpeech2_finetuning_example import run as fine_qu
+from TrainingInterfaces.TrainingPipelines.FastSpeech2_finetuning_quechua_only import run as fine_qu
 from TrainingInterfaces.TrainingPipelines.HiFiGAN_Avocodo import run as hifigan_combined
 from TrainingInterfaces.TrainingPipelines.HiFiGAN_Avocodo_low_RAM import run as hifigan_combined_low_ram
 from TrainingInterfaces.TrainingPipelines.pretrain_aligner import run as aligner
