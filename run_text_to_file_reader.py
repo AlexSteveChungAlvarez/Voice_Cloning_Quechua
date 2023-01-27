@@ -62,27 +62,20 @@ def read_contrastive_focus_sentences(model_id, device):
 
 if __name__ == '__main__':
     exec_device = "cuda" if torch.cuda.is_available() else "cpu"
-    os.makedirs("audios", exist_ok=True)
+    os.makedirs("test_audios", exist_ok=True)
     name = input("\nName of the .wav file? (or 'exit')\n")
     if name == "exit":
         sys.exit()
-    read_texts(model_id="Quechua",
-               sentence="Qantapuni qhawashayki warmiypaq.",
-               filename=f"audios/{name}_quechua_test_cloned.wav",
+    read_texts(model_id="Quechua_only",
+               sentence="Wayqey yanapariway ama hina kaychu.",
+               filename=f"test_audios/{name}_quechua_only_test_cloned.wav",
                device=exec_device,
                speaker_reference=f"{name}.wav",
                language="qu")
 
     read_texts(model_id="Quechua",
-               sentence="This is a sentence meant for testing, whether the new vocoder works the way I hope it does.",
-               filename=f"audios/{name}_english_test_cloned.wav",
+               sentence="Minchha paqarin wasiykita hamusaq.",
+               filename=f"test_audios/{name}_quechua_test_cloned.wav",
                device=exec_device,
                speaker_reference=f"{name}.wav",
-               language="en")
-
-    read_texts(model_id="Quechua",
-               sentence="Esta es una oración compleja. Incluso tiene una pausa.",
-               filename=f"audios/{name}_spanish_test_cloned.wav",
-               device=exec_device,
-               speaker_reference=f"{name}.wav",
-               language="es")
+               language="qu")
